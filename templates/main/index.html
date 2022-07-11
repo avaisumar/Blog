@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    
+    <!--<table>              
+        <tr>
+            <th><h1>Blogs</h1></th>
+            
+        </tr>   
+        {% for blog in allblog %}
+        <tr>
+             
+            <td><img src="{{ blog.Image.url }}" class="img-responsive" style="width: 25%; float: left; margin-right: 10px;" /></td>
+               
+        </tr>
+        <tr>
+            <td><h2>{{blog.title}}</h2> <h3>By</h3> <h2>{{blog.author}}</h2></td>
+            
+            
+        </tr>
+        <tr><td><h3><a href="{{blog.id}}">Read more</a></h3></td></tr>
+        
+        {% endfor %}
+    </table>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-item-center">
+                        
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+            
+    </div>
+   
+            
+
+                {% for blog in allblog %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{ blog.Image.url }}" class="img-responsive" style="width: 60%; float: left; margin-right: 10px;" />
+                        <div class="card-body">
+                            <div  class="card-title">{{blog.title}}</div>
+                            <div class="card-text"><h3>By</h3> <h2>{{blog.author}}</div>
+                            <a href="{{blog.id}}" class="btn btn-warning">Read more</a>
+                            
+                            {% if user.is_authenticated %}
+                                
+                                {% if user.id == blog.author.id %}
+                                    
+                                
+                                    
+                            <a href="{% url 'edit' blog.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'delete' blog.id %}"  class="btn btn-warning">Delete</a>
+                                {% endif %}
+                                
+                            {% endif %}
+                                
+                            </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+
+                </div>
+</body>
+</html>
+{% endblock content %}
